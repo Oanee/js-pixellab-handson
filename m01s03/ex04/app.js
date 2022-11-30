@@ -24,3 +24,20 @@ console.warn(`
   Afiseaza pozitia 1.
 `);
 console.log(myArray[1].toString());
+
+console.warn(`
+  Afiseaza numarul de pe pozitia 2 a arrayului.
+`);
+console.log(myArray[1].toString());
+
+console.log(myArray[3].toString());
+
+console.log((myArray.length - myArray[5]).toString());
+
+console.log((myArray[1] + myArray[3]).toString());
+
+console.log((myArray[0] * myArray[5]).toString());
+
+console.log(myArray[3] - myArray[4]);
+
+console.log(Math.pow(myArray[5], myArray[3]));
