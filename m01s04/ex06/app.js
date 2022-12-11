@@ -108,20 +108,21 @@ console.warn(`Folosind un for, afiseaza suma anilor de nastere a persoanelor.`);
 var sumAge = 0;
 for (var i = 0; i < person.friends.length; i++) {
   var friendAge = person.friends[i].age;
-  sumAge += friendAge;
+  sumAge += Math.abs(friendAge - new Date().getFullYear());
 }
 console.log(sumAge.toString());
 
 console.warn(`Afiseaza diferenta de varsta dintre persoana si prietenii din arrayul friends doar daca aceasta este mai mare de 2 ani.
 `);
-// for (var i = 0; i < person.friends.length; i++) {
-//   var friendAge = person.friends[i].age;
-//   var diff = Math.abs(friendAge - person.friends[i++].age);
+var diff = 0;
+for (var i = 0; i < person.friends.length; i++) {
+  var friendAge = person.friends[i].age;
+  diff = Math.abs(person.age - friendAge);
 
-//   if (diff === 2) {
-//     console.log(diff.toString());
-//   }
-// }
+  if (diff >= 2) {
+    console.log(diff);
+  }
+}
 
 console.warn(`Folosind obiectul person si un for, afiseaza in consola skillurile pe care le are persoana
 `);
