@@ -58,4 +58,12 @@ var i = 1;
 // } while (i < 32);
 
 // Folosind metoda prompt de trei ori cere utilizatorului un numar, o limita inferioara si o limita superioara apoi afiseaza toti multiplii de numar intre limita inferioara si limita superioara introduse.
-// ???????
+// var x = prompt('Spune un numar:');
+// var i = prompt('Spune o limita inferioara:');
+// var y = prompt('Spune o limita superioara:');
+// do {
+//   if (x % i === 0) {
+//     console.log(i);
+//   }
+//   i++;
+// } while (i < y);
