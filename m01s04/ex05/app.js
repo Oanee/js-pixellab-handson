@@ -9,7 +9,7 @@
 // Folosind metoda prompt cere utilizatorului numarul pentru care trebuie sa gasesti multipli si afiseaza mesajul: “Acest numar este multiplu de x.”
 // var x = prompt('Spune un numar:');
 // for (var i = 0; i < 100; i++) {
-//   if (x % i === 0) {
+//   if (i % x === 0) {
 //     console.log(`Acest numar este multiplu de ${i}.`);
 //   }
 // }
