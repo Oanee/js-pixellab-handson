@@ -99,3 +99,23 @@ Adauga o metoda numita flashLights() care sa apeleze cele doua metode in succesi
  */
 
 const cars = [audi, opel];
+
+/**
+ * Ruleaza o bucla prin forEach si afiseaza propozitiile (pentru fiecare din masini)
+“Masina era marca make si se deplasa cu speed km/h.”
+In fiecare iteratie, decelereaza masina cu 5 unitati, apoi afiseaza: “Viteza noua este speed km/h.”
+ */
+
+cars.forEach((car) => {
+  console.log(
+    `Masina era marca ${car.make} si se deplasa cu ${car.speed} km/h.`,
+  );
+});
+
+cars.forEach((car) => {
+  for (let i = 0; i < 5; i++) {
+    car.decelerate();
+  }
+
+  console.log(`VIteza noua este ${car.speed} km/h.`);
+});
