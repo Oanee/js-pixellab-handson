@@ -111,9 +111,15 @@ cars.forEach((car) => {
     `Masina era marca ${car.make} si se deplasa cu ${car.speed} km/h.`,
   );
 
-  for (let i = 0; i < 5; i++) {
-    car.decelerate();
-  }
+  // for (let i = 0; i < 5; i++) {
+  //   car.decelerate();
+  // }
+
+  car.decelerate();
+  car.decelerate();
+  car.decelerate();
+  car.decelerate();
+  car.decelerate();
 
   console.log(`Viteza noua este ${car.speed} km/h.`);
 });
