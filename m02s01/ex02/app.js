@@ -36,8 +36,8 @@ class Vehicle {
 }
 
 class Car extends Vehicle {
-  constructor(make, color, speed, topSpeed, reverseSpeed) {
-    super(make, color, 4, speed, topSpeed, reverseSpeed);
+  constructor(make, color, speed, topSpeed, topReverseSpeed) {
+    super(make, color, 4, speed, topSpeed, topReverseSpeed);
   }
 }
 
@@ -53,3 +53,26 @@ bike.decelerate();
 bike.decelerate();
 bike.decelerate();
 bike.setSpeed(-10);
+
+/**
+ * Creeaza o noua clasa care extinde Vehicle in mod similar cu Bicycle, numita Tricycle. Diferenta fiind ca o tricicleta are trei roti.
+Instantiaza o tricicleta (marca Tryke, culoare red, viteza curenta 2, viteza minima -2, viteza maxima 9). O poti stoca intr-o variabila numita trike.
+Seteaza viteza instantei trike la 0
+Foloseste metoda decelerate() de trei ori, ce observi?
+Seteaza viteza instantei trike la -10, ce observi?
+ */
+
+// topReverseSpeed nu e la fel cu pixeltab-ul
+
+class Tricycle extends Vehicle {
+  constructor(make, color, speed, topSpeed) {
+    super(make, color, 3, speed, topSpeed, -2);
+  }
+}
+
+const trike = new Tricycle('Tryke', 'red', 2, 9, -2);
+trike.setSpeed(0);
+trike.decelerate();
+trike.decelerate();
+trike.decelerate();
+trike.speed(-10);
