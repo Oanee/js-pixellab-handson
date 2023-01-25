@@ -5,12 +5,14 @@ class Car {
     color = 'black',
     tireColor = 'black',
     capColor = 'white',
+    areHazardsOn = false,
   ) {
     this.left = left;
     this.top = top;
     this.color = color;
     this.tireColor = tireColor;
     this.capColor = capColor;
+    this.areHazardsOn = areHazardsOn;
 
     this.frame = document.createElement('div');
     this.frame.classList.add('frame');
@@ -133,16 +135,15 @@ class Car {
   }
 
   toggleHazards() {
-    let areHazardOn = false;
     setInterval(() => {
-      if (areHazardOn == false) {
+      if (this.areHazardsOn == false) {
         this.lightFront.classList.add('light--on');
         this.lightBack.classList.add('light--on');
-        areHazardOn = true;
+        this.areHazardsOn = true;
       } else {
         this.lightFront.classList.remove('light--on');
         this.lightBack.classList.remove('light--on');
-        areHazardOn = false;
+        this.areHazardsOn = false;
       }
     }, 1000);
 
