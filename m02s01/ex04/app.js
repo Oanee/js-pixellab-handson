@@ -1,18 +1,21 @@
 class Car {
+  areHazardsOn = false;
+  areLightsOn = false;
+
   constructor(
     left = 0,
     top = 0,
     color = 'black',
     tireColor = 'black',
     capColor = 'white',
-    areHazardsOn = false,
   ) {
     this.left = left;
     this.top = top;
     this.color = color;
     this.tireColor = tireColor;
     this.capColor = capColor;
-    this.areHazardsOn = areHazardsOn;
+
+    this.intervalId = -1;
 
     this.frame = document.createElement('div');
     this.frame.classList.add('frame');
@@ -73,12 +76,14 @@ class Car {
   turnLightsOn() {
     // this.lightFront.style.backgroundColor = 'yellow';
     this.lightFront.classList.add('light--on');
+    this.areLightsOn = true;
 
     return this;
   }
 
   turnLightsOff() {
     this.lightFront.classList.remove('light--on');
+    this.areLightsOn = false;
 
     return this;
   }
@@ -135,17 +140,37 @@ class Car {
   }
 
   toggleHazards() {
-    setInterval(() => {
-      if (this.areHazardsOn == false) {
-        this.lightFront.classList.add('light--on');
-        this.lightBack.classList.add('light--on');
-        this.areHazardsOn = true;
-      } else {
-        this.lightFront.classList.remove('light--on');
-        this.lightBack.classList.remove('light--on');
-        this.areHazardsOn = false;
-      }
-    }, 1000);
+    // setInterval(() => {
+    //   if (this.areHazardsOn == false) {
+    //     this.lightFront.classList.add('light--on');
+    //     this.lightBack.classList.add('light--on');
+    //     this.areHazardsOn = true;
+    //   } else {
+    //     this.lightFront.classList.remove('light--on');
+    //     this.lightBack.classList.remove('light--on');
+    //     this.areHazardsOn = false;
+    //   }
+    // }, 1000);
+
+    if (this.areHazardsOn) {
+      // stop hazards
+      clearInterval(this.intervalId);
+      this.turnLightsOff();
+      this.disengageBreak();
+      this.areHazardsOn = false;
+    } else {
+      // v2 for "this"
+      this.intervalId = setInterval(() => {
+        if (this.areLightsOn) {
+          this.turnLightsOff();
+          this.disengageBreak();
+        } else {
+          this.turnLightsOn();
+          this.engageBreak();
+        }
+      }, 1000);
+      this.areHazardsOn = true;
+    }
 
     return this;
   }
