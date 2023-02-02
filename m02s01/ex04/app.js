@@ -155,8 +155,6 @@ class Car {
     if (this.areHazardsOn) {
       // stop hazards
       clearInterval(this.intervalId);
-      this.turnLightsOff();
-      this.disengageBreak();
       this.areHazardsOn = false;
     } else {
       // v2 for "this"
