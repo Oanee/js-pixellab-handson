@@ -8,17 +8,18 @@ const $personForm = $('#personForm')
     const $ageInput = $form.find('input[name="age"]');
     const $skillInputs = $form.find('input[name^="skill-"]');
     const $petInputs = $form.find('input[name^="pet-"]');
+    const $friendInputs = $form.find('input[name^="friend-"]');
 
     const skills = [];
-
     $skillInputs.each(function () {
-      const $skillInput = $(this);
+      const $skilInput = $(this);
 
-      skills.push($skillInput.val());
+      skills.push($skilInput.val());
     });
 
     const pets = [];
     $petInputs.each(function () {
+      // name="pet-Twix, Papagal, 45"
       const $input = $(this);
       const name = $input.prop('name');
       const petValue = name.split('-')[1];
@@ -28,6 +29,23 @@ const $personForm = $('#personForm')
         species: parts[1],
         age: parts[2],
       };
+
+      pets.push(pet);
+    });
+
+    const friends = [];
+    $friendInputs.each(function () {
+      const $input = $(this);
+      const name = $input.prop('name');
+      const friendValue = name.split('-')[1];
+      const parts = friendValue.split(', ');
+      const friend = {
+        name: parts[0],
+        surname: parts[1],
+        age: parts[2],
+      };
+
+      pets.push(friend);
     });
 
     const person = {
@@ -36,6 +54,7 @@ const $personForm = $('#personForm')
       age: $ageInput.val(),
       skills,
       pets,
+      friends,
     };
 
     $form.trigger('reset');
@@ -99,7 +118,26 @@ const $personForm = $('#personForm')
       pet[key] = value;
     });
 
+    $inputs.val('');
+
     $createPetButton.after(renderPetUl(pet));
+  })
+  .on('click', '.create-friend-button', function () {
+    const $createFriendButton = $(this);
+    const $inputs = $createFriendButton.siblings('input[name]');
+    const friend = {};
+
+    $inputs.each(function () {
+      const $input = $(this);
+      const value = $input.val();
+      const key = $input.prop('name').split('-').pop();
+
+      friend[key] = value;
+    });
+
+    $inputs.val('');
+
+    $createFriendButton.after(renderFriendUl(friend));
   });
 
 $('#has-pets').on('click', function () {
@@ -108,8 +146,10 @@ $('#has-pets').on('click', function () {
   const checked = $checkbox.prop('checked') === true;
 
   if (checked === true) {
+    // show
     $fieldset.slideDown();
   } else {
+    // hide
     $fieldset.slideUp();
   }
 });
@@ -139,7 +179,7 @@ function renderSkillsUl(skill = '') {
 
   if ($skillsUl.length === 0) {
     $skillsUl = $('<ul>', {
-      class: 'skills-ul',
+      class: cssClass,
     });
   }
 
@@ -159,13 +199,13 @@ function renderSkillsUl(skill = '') {
   }).appendTo($skillLi);
 
   $('<button>', {
-    type: 'Button',
+    type: 'button',
     text: 'Delete',
     class: 'delete-skill-button',
   }).appendTo($skillLi);
 
   $('<button>', {
-    type: 'Button',
+    type: 'button',
     text: 'Edit',
     class: 'edit-skill-button',
   }).appendTo($skillLi);
@@ -191,10 +231,10 @@ function renderSkillsUl(skill = '') {
 
 function renderPetUl(pet = {}) {
   const ulClass = 'pet-preview-ul';
-  const $ul = $(`.${ulClass}`);
+  let $ul = $(`.${ulClass}`);
 
   let petString = '';
-  Object.keys(pet).forEach(function (keyName) {
+  Object.keys(pet).forEach(function (keyName, index, keys) {
     const value = pet[keyName];
     let punctuation = ', ';
 
@@ -222,6 +262,47 @@ function renderPetUl(pet = {}) {
         type: 'hidden',
         value: petString,
         name: `pet-${petString}`,
+      }),
+    );
+
+  $ul.append($li);
+
+  return $ul;
+}
+
+function renderFriendUl(friend = {}) {
+  const ulClass = 'friend-preview-ul';
+  let $ul = $(`.${ulClass}`);
+
+  let friendString = '';
+  Object.keys(friend).forEach(function (keyName, index, keys) {
+    const value = friend[keyName];
+    let punctuation = ', ';
+
+    if (keys.length - 1 === index) {
+      punctuation = '';
+    }
+
+    friendString += `${value}${punctuation}`;
+  });
+
+  if ($ul.length === 0) {
+    $ul = $('<ul>', {
+      class: ulClass,
+    });
+  }
+
+  const $li = $('<li>')
+    .append(
+      $('<span>', {
+        text: friendString,
+      }),
+    )
+    .append(
+      $('<input>', {
+        type: 'hidden',
+        value: friendString,
+        name: `friend-${friendString}`,
       }),
     );
 
@@ -273,13 +354,13 @@ function displayPerson(person) {
   $personDisplay
     .append(displayPersonDetails(person))
     .append(displayPersonSkills(person))
-    .append(displayPet(person));
+    .append(displayPet(person))
+    .append(displayFriend(person));
 
   return $personDisplay;
 }
 
 function displayPet(person) {
-  const pets = person.pets;
   const $petDisplay = $('<div>');
 
   person.pets.forEach(function (pet) {
@@ -291,17 +372,31 @@ function displayPet(person) {
   return $petDisplay;
 }
 
+function displayFriend(person) {
+  const $friendDisplay = $('<div>');
+
+  person.friends.forEach(function (friend) {
+    $('<p>', {
+      text: `${friend.name}, ${friend.surname}, ${friend.age}`,
+    }).appendTo($friendDisplay);
+  });
+
+  return $friendDisplay;
+}
+
 function displayPersonDetails(person) {
-  // div
+  // creeare div
   const $personDetails = $('<div>');
-  // h1 + appends la div
+  // creeare h1 + append la div
   $('<h1>', {
     text: `${person.name} ${person.surname}`,
   }).appendTo($personDetails);
-  // p cu text varsta + append la div
+
+  // creeare p cu text varsta + append la div
   $('<p>', {
     text: `Age: ${person.age}`,
   }).appendTo($personDetails);
+
   // return div
 
   return $personDetails;
@@ -313,16 +408,19 @@ function displayPersonSkills(person) {
   if (skills.length < 1) {
     return null;
   }
-  // div
+
+  // creeare div
   const $container = $('<div>');
-  // h2 + append
+
+  // creeare h2 + append
   $('<h2>', {
     text: 'Skills',
   }).appendTo($container);
-  // ul + append
+
+  // creeare ul + append
   const $ul = $('<ul>').appendTo($container);
 
-  // bucla cu li-uri
+  // bucla cu liuri + append ul
   skills.forEach(function (skill) {
     $('<li>', {
       text: skill,
