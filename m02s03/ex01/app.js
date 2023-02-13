@@ -14,8 +14,22 @@ class Car {
     return this;
   }
 
-  decelare(deltaSpeed = 1) {
+  decelarete(deltaSpeed = 1) {
     this.speed = this.speed - deltaSpeed;
+
+    return this;
+  }
+
+  setSpeed(speed = 0) {
+    if (speed > this.topSpeed) {
+      speed = this.topSpeed;
+    }
+
+    if (speed < this.topReverseSpeed) {
+      speed = this.topReverseSpeed;
+    }
+
+    this.speed = speed;
 
     return this;
   }
@@ -25,3 +39,29 @@ class Car {
 }
 
 const audi = new Car('Audi', 'black', 4, 50);
+
+audi
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .decelarete()
+  .decelarete()
+  .decelarete();
+
+let carSpeed = document.createElement('p');
+carSpeed.innerText = `Audi speed is: ${audi.speed}`;
+document.body.append(carSpeed);
+
+audi.accelerate(12).decelarete(3).accelerate(4);
+
+let newCarSpeed = document.createElement('p');
+newCarSpeed.innerText = `Audi new speed is: ${audi.speed}`;
+document.body.append(newCarSpeed);
+
+audi.setSpeed(4).accelerate();
+
+let newNewCarSpeed = document.createElement('p');
+newNewCarSpeed.innerText = `Audi new speed is: ${audi.speed}`;
+document.body.append(newNewCarSpeed);

@@ -1,10 +1,11 @@
 const button = document.getElementById('matchMedia');
-const media = matchMEdia('(min-width: 650px)');
+const media = matchMedia('(min-width: 650px)');
 
 const clickHandler = () => {
   alert('Arunca cu alerta');
 };
 
+// alt name: viewportChange
 const resizeHandler = (matches) => {
   if (matches) {
     button.addEventListener('click', clickHandler);

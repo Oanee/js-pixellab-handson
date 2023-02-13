@@ -1,5 +1,6 @@
 const stage = document.querySelector('.stage');
 let entriesCounter = 0;
+let borderCounter = 0;
 
 const log = (message = '', cssClass = 'log') => {
   let paragraph = document.querySelector(`.${cssClass}`);
@@ -18,10 +19,12 @@ stage.addEventListener('mouseover', () => {
   console.log(message);
   log(message);
   log(`Mouseul a fost pe scena de ${++entriesCounter} ori.`, 'entriesCount');
+  log(`Mouseul a trectu peste laturi de ${++borderCounter}`, 'borderCount');
 });
 
 stage.addEventListener('mouseout', () => {
   const message = 'Mouseul nu este pe scena';
   console.log(message);
   log(message);
+  log(`Mouseul a trectu peste laturi de ${++borderCounter}`, 'borderCount');
 });
