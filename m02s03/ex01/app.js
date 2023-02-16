@@ -14,7 +14,7 @@ class Car {
     return this;
   }
 
-  decelarete(deltaSpeed = 1) {
+  decelarate(deltaSpeed = 1) {
     this.speed = this.speed - deltaSpeed;
 
     return this;
@@ -46,15 +46,15 @@ audi
   .accelerate()
   .accelerate()
   .accelerate()
-  .decelarete()
-  .decelarete()
-  .decelarete();
+  .decelarate()
+  .decelarate()
+  .decelarate();
 
 let carSpeed = document.createElement('p');
 carSpeed.innerText = `Audi speed is: ${audi.speed}`;
 document.body.append(carSpeed);
 
-audi.accelerate(12).decelarete(3).accelerate(4);
+audi.accelerate(12).decelarate(3).accelerate(4);
 
 let newCarSpeed = document.createElement('p');
 newCarSpeed.innerText = `Audi new speed is: ${audi.speed}`;

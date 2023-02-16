@@ -20,3 +20,21 @@ let age1 = {
 let age2 = {
   age: 25,
 };
+
+const fullPerson1 = {
+  ...person1,
+  ...age1,
+};
+console.log(fullPerson1);
+
+const fullPerson2 = {
+  ...person2,
+  age: 40,
+};
+console.log(fullPerson2);
+
+const fullPerson3 = {
+  ...person3,
+  ...age2,
+};
+console.log(fullPerson3);
