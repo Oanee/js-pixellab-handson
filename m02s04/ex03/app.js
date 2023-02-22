@@ -14,6 +14,10 @@ const axisMap = {
   E: { x: 1 },
   S: { y: 1 },
   W: { x: -1 },
+  NW: { y: -1, x: -1 },
+  NE: { y: -1, x: 1 },
+  SW: { y: 1, x: -1 },
+  SE: { y: 1, x: 1 },
 };
 
 const keysMap = {
