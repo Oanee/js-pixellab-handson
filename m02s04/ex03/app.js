@@ -1,7 +1,7 @@
 const heroElement = document.querySelector('.hero');
 const controls = document.querySelector('.controls');
 const stage = document.querySelector('.stage');
-const step = 10;
+const step = 30;
 const heroData = {
   x: 0,
   y: 0,
@@ -33,9 +33,10 @@ controls.addEventListener('click', (event) => {
     return;
   }
 
-  // pentru lizibilitate
-  const button = target;
   const axisDirection = axisMap[direction];
+
+  updateHeroData(axisDirection);
+  renderHero();
 });
 
 document.addEventListener('keydown', (event) => {
